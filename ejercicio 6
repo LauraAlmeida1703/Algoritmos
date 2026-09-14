@@ -1,0 +1,67 @@
+# Ejercicio 6: Desviación estándar
+#
+# a) Este programa calcula la desviación estándar POBLACIONAL (se divide
+#    entre n, la cantidad total de datos). La MUESTRAL se diferencia en que
+#    divide entre (n-1) en lugar de n; esa corrección (de Bessel) se usa
+#    cuando los datos son solo una MUESTRA de una población más grande, para
+#    obtener un estimador insesgado de la varianza poblacional.
+#
+# b) Dificultad adicional en la versión sin listas: para calcular la
+#    desviación estándar primero se necesita conocer la MEDIA de todos los
+#    datos, y solo después se puede calcular la suma de las diferencias al
+#    cuadrado respecto a esa media. Como no se guardan los datos en una
+#    lista, no es posible "volver a recorrerlos" tal como se ingresaron.
+#    La solución usada aquí es pedirle al usuario que ingrese los mismos
+#    datos DOS VECES: en la primera pasada solo se calcula la media, y en la
+#    segunda, ya conociendo la media, se calcula la suma de diferencias al
+#    cuadrado.
+
+import math
+
+SENTINELA = -999
+print(f"Ingrese valores enteros uno por uno. Ingrese {SENTINELA} para terminar.")
+
+# ---------- Versión CON listas ----------
+valores = []
+valor = int(input("Ingrese un valor: "))
+while valor != SENTINELA:
+    valores.append(valor)
+    valor = int(input("Ingrese un valor: "))
+
+if len(valores) == 0:
+    print("Con listas: no se ingresó ningún valor.")
+else:
+    media = sum(valores) / len(valores)
+    suma_cuadrados = 0
+    for v in valores:
+        suma_cuadrados += (v - media) ** 2
+    desviacion_con_listas = math.sqrt(suma_cuadrados / len(valores))
+    print(f"Con listas: media = {media}, desviación estándar (poblacional) = {desviacion_con_listas}")
+
+# ---------- Versión SIN listas ----------
+print(f"\nAhora repita el proceso (versión sin listas). Ingrese {SENTINELA} para terminar.")
+print("Primero se leerán los datos para calcular la media:")
+
+suma = 0
+cantidad = 0
+valor = int(input("Ingrese un valor: "))
+while valor != SENTINELA:
+    suma += valor
+    cantidad += 1
+    valor = int(input("Ingrese un valor: "))
+
+if cantidad == 0:
+    print("Sin listas: no se ingresó ningún valor.")
+else:
+    media_sin_listas = suma / cantidad
+    print(f"Media calculada: {media_sin_listas}")
+    print("Ahora vuelva a ingresar los MISMOS datos para calcular la desviación:")
+
+    suma_cuadrados_sin_listas = 0
+    valor = int(input("Ingrese un valor: "))
+    while valor != SENTINELA:
+        suma_cuadrados_sin_listas += (valor - media_sin_listas) ** 2
+        valor = int(input("Ingrese un valor: "))
+
+    desviacion_sin_listas = math.sqrt(suma_cuadrados_sin_listas / cantidad)
+    print(f"Sin listas: desviación estándar (poblacional) = {desviacion_sin_listas}")
