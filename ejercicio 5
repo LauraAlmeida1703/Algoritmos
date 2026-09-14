@@ -1,0 +1,46 @@
+# Ejercicio 5: Media de los valores pares
+#
+# a) Criterio de terminación: se usa un VALOR CENTINELA. El usuario ingresa
+#    números enteros uno por uno, y cuando ingresa el valor -999 el programa
+#    entiende que ya no hay más datos y deja de pedir números.
+# b) El caso en que no se lea ningún valor par se maneja explícitamente
+#    revisando si la cantidad de pares es 0 antes de dividir (para evitar
+#    una división entre cero).
+
+SENTINELA = -999
+print(f"Ingrese valores enteros uno por uno. Ingrese {CENTINELA} para terminar.")
+
+# Versión con listas 
+valores = []
+valor = int(input("Ingrese un valor: "))
+while valor != SENTINELA:
+    valores.append(valor)
+    valor = int(input("Ingrese un valor: "))
+
+pares = []
+for v in valores:
+    if v % 2 == 0:
+        pares.append(v)
+
+if len(pares) == 0:
+    print("Con listas: no se ingresó ningún valor par.")
+else:
+    media_con_listas = sum(pares) / len(pares)
+    print(f"Con listas: la media de los pares es {media_con_listas}")
+
+#  Versión sin listas
+print(f"\nAhora repita el proceso (versión sin listas). Ingrese {SENTINELA} para terminar.")
+suma_pares = 0
+cantidad_pares = 0
+valor = int(input("Ingrese un valor: "))
+while valor != SENTINELA:
+    if valor % 2 == 0:
+        suma_pares += valor
+        cantidad_pares += 1
+    valor = int(input("Ingrese un valor: "))
+
+if cantidad_pares == 0:
+    print("Sin listas: no se ingresó ningún valor par.")
+else:
+    media_sin_listas = suma_pares / cantidad_pares
+    print(f"Sin listas: la media de los pares es {media_sin_listas}")
