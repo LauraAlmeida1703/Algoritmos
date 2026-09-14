@@ -1,0 +1,41 @@
+# Ejercicio 8: Clasificación de triángulos
+print("Ingrese las longitudes de los lados de un triángulo.")
+print("Ingrese 0 como primer lado para terminar el programa.")
+
+lado_a = float(input("Lado a: "))
+
+while lado_a != 0:
+    lado_b = float(input("Lado b: "))
+    lado_c = float(input("Lado c: "))
+
+    if lado_a <= 0 or lado_b <= 0 or lado_c <= 0:
+        print("Las longitudes deben ser positivas y no nulas. Intente de nuevo.\n")
+    elif (lado_a + lado_b <= lado_c) or (lado_a + lado_c <= lado_b) or (lado_b + lado_c <= lado_a):
+        # Desigualdad triangular: la suma de dos lados debe superar al tercero
+        print("Estos valores NO forman un triángulo válido (no cumplen la desigualdad triangular).\n")
+    else:
+        # a) Clasificación por lados
+        if lado_a == lado_b == lado_c:
+            tipo_lados = "equilátero"
+        elif lado_a == lado_b or lado_a == lado_c or lado_b == lado_c:
+            tipo_lados = "isósceles"
+        else:
+            tipo_lados = "escaleno"
+
+        # b) Clasificación por ángulos: se compara el cuadrado del lado mayor
+        # con la suma de los cuadrados de los otros dos.
+        mayor = max(lado_a, lado_b, lado_c)
+        otros_cuadrados = lado_a ** 2 + lado_b ** 2 + lado_c ** 2 - mayor ** 2
+
+        if mayor ** 2 == otros_cuadrados:
+            tipo_angulos = "rectángulo"
+        elif mayor ** 2 > otros_cuadrados:
+            tipo_angulos = "obtusángulo"
+        else:
+            tipo_angulos = "acutángulo"
+
+        print(f"El triángulo es {tipo_lados} y {tipo_angulos}.\n")
+
+    lado_a = float(input("Lado a (ingrese 0 para salir): "))
+
+print("Programa terminado.")
