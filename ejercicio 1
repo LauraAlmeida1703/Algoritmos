@@ -1,0 +1,47 @@
+Taller 1 , Algoritmos
+
+
+# Ejercicio 1: Calculadora de funciones trigonométricas por series
+# Se aproxima seno y coseno usando su serie de Taylor/Maclaurin,
+# sumando un número fijo de términos (n_terminos).
+import math
+
+n_terminos = 10  # número de términos usados en la serie
+
+opcion = -1
+while opcion != 4:
+    print("\n----- MENU -----")
+    print("1. Seno")
+    print("2. Coseno")
+    print("3. Tangente")
+    print("4. Salir")
+    opcion = int(input("Seleccione una opción: "))
+
+    if opcion == 1:
+        x_grados = float(input("Ingrese el valor de x en grados: "))
+        x = math.radians(x_grados)  # la serie requiere el ángulo en radianes
+        resultado = 0
+        for k in range(n_terminos):
+            termino = ((-1) ** k) * (x ** (2 * k + 1)) / math.factorial(2 * k + 1)
+            resultado += termino
+        print(f"sin({x_grados}°) ≈ {resultado}")
+
+    elif opcion == 2:
+        x_grados = float(input("Ingrese el valor de x en grados: "))
+        x = math.radians(x_grados)
+        resultado = 0
+        for k in range(n_terminos):
+            termino = ((-1) ** k) * (x ** (2 * k)) / math.factorial(2 * k)
+            resultado += termino
+        print(f"cos({x_grados}°) ≈ {resultado}")
+
+    elif opcion == 3:
+        # No se implementa: solo se informa al usuario, como pide el enunciado
+        print("La tangente podría calcularse (por ejemplo como sin/cos),")
+        print("pero esta opción aún no ha sido implementada.")
+
+    elif opcion == 4:
+        print("Saliendo del programa...")
+
+    else:
+        print("Opción no válida, intente de nuevo.")
