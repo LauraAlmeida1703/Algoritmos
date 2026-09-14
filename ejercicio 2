@@ -1,0 +1,20 @@
+# Ejercicio 2: Representación de un número en base b
+n = int(input("Ingrese un entero positivo n: "))
+
+b = int(input("Ingrese la base b (2 <= b < 10): "))
+while b < 2 or b >= 10:
+    print("Base inválida. Debe cumplir 2 <= b < 10.")
+    b = int(input("Ingrese nuevamente la base b: "))
+
+if n == 0:
+    # Caso especial: el ciclo de conversión normal no funcionaría para n = 0
+    print("La representación de 0 en base", b, "es: 0")
+else:
+    digitos = ""  # aquí se van acumulando los dígitos, de derecha a izquierda
+    numero = n
+    while numero > 0:
+        residuo = numero % b
+        digitos = str(residuo) + digitos  # se antepone el nuevo dígito obtenido
+        numero = numero // b
+
+    print(f"El número {n} en base {b} es: {digitos}")
