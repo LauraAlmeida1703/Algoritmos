@@ -1,0 +1,42 @@
+# Ejercicio 7: Moda de un conjunto de enteros
+SENTINELA = -999
+print(f"Ingrese valores enteros. Ingrese {SENTINELA} para terminar.")
+
+valores = []
+valor = int(input("Ingrese un valor: "))
+while valor != SENTINELA:
+    valores.append(valor)
+    valor = int(input("Ingrese un valor: "))
+
+if len(valores) == 0:
+    print("No se ingresó ningún valor.")
+else:
+    # Se cuenta cuántas veces aparece cada valor distinto, usando dos listas
+    # paralelas: una con los valores distintos y otra con sus frecuencias.
+    valores_distintos = []
+    frecuencias = []
+    for v in valores:
+        if v in valores_distintos:
+            indice = valores_distintos.index(v)
+            frecuencias[indice] += 1
+        else:
+            valores_distintos.append(v)
+            frecuencias.append(1)
+
+    frecuencia_maxima = max(frecuencias)
+
+    if frecuencia_maxima == 1:
+        # Explícitamente: si nadie se repite (frecuencia máxima = 1), no hay moda
+        print("Ningún valor se repite: no hay moda.")
+    else:
+        modas = []
+        for i in range(len(valores_distintos)):
+            if frecuencias[i] == frecuencia_maxima:
+                modas.append(valores_distintos[i])
+
+        if len(modas) == 1:
+            print(f"La moda es {modas[0]} (aparece {frecuencia_maxima} veces).")
+        else:
+            # Caso multimodal: se informa explícitamente y se muestran todos los valores
+            print(f"El conjunto es multimodal (hay {len(modas)} valores con la misma frecuencia máxima).")
+            print(f"Esos valores, con frecuencia {frecuencia_maxima} cada uno, son: {modas}")
