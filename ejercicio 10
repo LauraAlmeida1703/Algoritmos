@@ -1,0 +1,40 @@
+# Ejercicio 10: Números primos menores o iguales que n
+n = int(input("Ingrese un entero positivo n: "))
+
+print(f"Números primos menores o iguales que {n}:")
+
+cantidad_primos = 0
+mayor_primo = None  # se usa None porque aún no se ha encontrado ningún primo
+
+numero = 2
+while numero <= n:
+    es_primo = True
+    divisor = 2
+
+    # Optimización: basta con probar divisores hasta la raíz cuadrada de
+    # 'numero' (aquí, mediante divisor*divisor <= numero para evitar usar
+    # math.sqrt). Esto es correcto porque los divisores de un número siempre
+    # aparecen en pares (d, numero/d). Si 'numero' tuviera un divisor
+    # d > sqrt(numero), entonces el divisor emparejado numero/d sería menor
+    # que sqrt(numero), y ya se habría detectado antes en el ciclo. Por lo
+    # tanto, si no se encuentra ningún divisor hasta la raíz cuadrada,
+    # tampoco puede existir uno más grande, y el número es primo.
+    while divisor * divisor <= numero:
+        if numero % divisor == 0:
+            es_primo = False
+            break
+        divisor += 1
+
+    if es_primo:
+        print(numero, end=" ")
+        cantidad_primos += 1
+        mayor_primo = numero
+
+    numero += 1
+
+print()  # salto de línea después de imprimir todos los primos
+print(f"Cantidad de primos encontrados: {cantidad_primos}")
+if mayor_primo is not None:
+    print(f"El mayor primo encontrado es: {mayor_primo}")
+else:
+    print("No se encontraron números primos en ese rango.")
