@@ -1,0 +1,30 @@
+# Ejercicio 9: Aproximación de π con criterio de tolerancia (serie de Leibniz)
+# π/4 = 1 - 1/3 + 1/5 - 1/7 + 1/9 - ...
+import math
+
+epsilon = float(input("Ingrese la tolerancia (por ejemplo 1e-2, 1e-4, 1e-6): "))
+
+suma = 0
+n = 0
+termino = 1  # valor inicial cualquiera > epsilon, solo para poder entrar al ciclo
+
+while abs(termino) >= epsilon:
+    termino = ((-1) ** n) / (2 * n + 1)
+    suma += termino
+    n += 1
+
+pi_aproximado = 4 * suma
+error = abs(pi_aproximado - math.pi)
+
+print(f"Aproximación de π: {pi_aproximado}")
+print(f"Número de términos utilizados: {n}")
+print(f"Error respecto a math.pi: {error}")
+
+# Comentario esperado al probar con epsilon = 1e-2, 1e-4 y 1e-6:
+# A medida que la tolerancia disminuye (se exige más precisión), el número
+# de términos necesarios aumenta mucho. Esto pasa porque la serie de Leibniz
+# converge muy lentamente: el error cometido es del mismo orden que el
+# último término sumado (que es aproximadamente 1/(2n+1)). Entonces, para
+# reducir el error en un factor de 100 (por ejemplo, pasar de epsilon=1e-2
+# a epsilon=1e-4) hace falta aumentar la cantidad de términos en un factor
+# cercano a 100 también.
