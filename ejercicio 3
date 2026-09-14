@@ -1,0 +1,22 @@
+# Ejercicio 3: Inversión de una frase (por palabras y por letras)
+frase = input("Ingrese una frase: ")
+
+palabras = frase.split()  # separa la frase en una lista de palabras (por espacios)
+
+# Inversión palabra por palabra: se recorre la lista de palabras de atrás
+# hacia adelante, pero cada palabra conserva internamente sus letras en orden.
+frase_palabras_invertidas = ""
+for i in range(len(palabras) - 1, -1, -1):
+    frase_palabras_invertidas += palabras[i]
+    if i != 0:
+        frase_palabras_invertidas += " "
+
+# Inversión letra por letra: se recorre toda la frase original (incluyendo
+# espacios) de atrás hacia adelante.
+frase_letras_invertida = ""
+for i in range(len(frase) - 1, -1, -1):
+    frase_letras_invertida += frase[i]
+
+print("Frase original:            ", frase)
+print("Invertida por palabras:    ", frase_palabras_invertidas)
+print("Invertida letra por letra: ", frase_letras_invertida)
