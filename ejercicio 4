@@ -1,0 +1,11 @@
+# Ejercicio 4: Intercalado de ceros entre las cifras
+n = int(input("Ingrese un entero positivo: "))
+
+n_str = str(n)  # se convierte a cadena para poder recorrer cifra por cifra
+resultado = ""
+for i in range(len(n_str)):
+    resultado += n_str[i]
+    if i != len(n_str) - 1:  # no se agrega el 0 después de la última cifra
+        resultado += "0"
+
+print(f"El número {n} con ceros intercalados es: {resultado}")
